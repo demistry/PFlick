@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,9 @@
 		34E812A824F97F5D00E2575A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812A724F97F5D00E2575A /* Constants.swift */; };
 		34E812AC24F983C300E2575A /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812AB24F983C300E2575A /* SearchBarView.swift */; };
 		34E812AE24F983DF00E2575A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812AD24F983DF00E2575A /* Extensions.swift */; };
+		34E812B124F991D700E2575A /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812B024F991D700E2575A /* RxSwift */; };
+		34E812B324F991D700E2575A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812B224F991D700E2575A /* RxCocoa */; };
+		34E812B624F9922E00E2575A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812B524F9922E00E2575A /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E812B624F9922E00E2575A /* SDWebImage in Frameworks */,
+				34E812B324F991D700E2575A /* RxCocoa in Frameworks */,
+				34E812B124F991D700E2575A /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,6 +251,11 @@
 			dependencies = (
 			);
 			name = PFlick;
+			packageProductDependencies = (
+				34E812B024F991D700E2575A /* RxSwift */,
+				34E812B224F991D700E2575A /* RxCocoa */,
+				34E812B524F9922E00E2575A /* SDWebImage */,
+			);
 			productName = PFlick;
 			productReference = 34E8126224F97C0000E2575A /* PFlick.app */;
 			productType = "com.apple.product-type.application";
@@ -317,6 +328,10 @@
 				Base,
 			);
 			mainGroup = 34E8125924F97C0000E2575A;
+			packageReferences = (
+				34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */,
+				34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = 34E8126324F97C0000E2575A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -698,6 +713,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+		34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		34E812B024F991D700E2575A /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		34E812B224F991D700E2575A /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		34E812B524F9922E00E2575A /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 34E8125A24F97C0000E2575A /* Project object */;
 }

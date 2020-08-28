@@ -13,3 +13,17 @@ extension UIView{
         self.translatesAutoresizingMaskIntoConstraints = false
     }
 }
+
+extension UIViewController{
+    @discardableResult
+    func hideKeyboardWhenTappedAround()->UITapGestureRecognizer {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        return tap
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}

@@ -17,5 +17,6 @@ struct Constants {
     
     struct Images{
         static let CancelIcon = UIImage(named: "cancelIcon")
+        static let SearchIcon = UIImage(named: "searchIcon")
     }
 }
