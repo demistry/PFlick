@@ -21,17 +21,27 @@ class PhotosCollectionViewCell: UICollectionViewCell, Cellable {
     @IBOutlet weak var imageViewDisplay: UIImageView!
     var indexPath: IndexPath!
     weak var delegate: PhotoCollectionViewCellDelegate?
-    let isFilterOn = UserDefaults.standard.bool(forKey: Constants.Keys.isFilterOn)
-    var photo: PhotosViewData!{
+    var isFilterOn = UserDefaults.standard.bool(forKey: Constants.Keys.isFilterOn)
+    var photo: PhotosViewData?{
         didSet{
-            imageViewDisplay.sd_setImage(with: photo.photoURL.url, placeholderImage: nil) {[weak self] (img, err, cache, url) in
-                guard err == nil else{
+            isFilterOn = UserDefaults.standard.bool(forKey: Constants.Keys.isFilterOn)
+            imageViewDisplay.sd_setImage(with: photo?.photoURL.url, placeholderImage: nil) {[weak self] (img, err, cache, url) in
+                guard err == nil, let selfVal = self else{
                     return
                 }
-                self?.photo.originalImage = img
-                self?.imageViewDisplay.image = self?.isFilterOn ?? false ? img?.addFilter(filterType: self?.photo.filter ?? "") : img
-                self?.filterLabelName.text = self?.isFilterOn ?? false ? self?.photo.filter : ""
-                self?.filterTextBackground.alpha = self?.isFilterOn ?? false ? 1 : 0
+                self?.photo?.originalImage = img
+                if selfVal.isFilterOn{
+                    self?.imageViewDisplay.image = img?.addFilter(filterType: selfVal.photo?.filter ?? "")
+                } else{
+                    self?.imageViewDisplay.image = selfVal.photo?.originalImage
+                }
+            }
+            if isFilterOn{
+                self.filterTextBackground.alpha = 1
+                self.filterLabelName.text = self.photo?.filter
+            } else{
+                self.filterLabelName.text = ""
+                self.filterTextBackground.alpha = 0
             }
         }
     }
@@ -42,9 +52,6 @@ class PhotosCollectionViewCell: UICollectionViewCell, Cellable {
         imageViewDisplay.layer.cornerRadius = 6
         imageViewDisplay.layer.masksToBounds = true
         imageViewDisplay.contentMode = .scaleAspectFill
-        
-        filterLabelName.text = isFilterOn ? self.photo.filter : ""
-        filterTextBackground.alpha = isFilterOn ? 1 : 0
     }
 
 }

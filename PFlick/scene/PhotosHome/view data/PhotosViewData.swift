@@ -27,7 +27,6 @@ class PhotosViewData: IdentifiableType, Equatable{
     
     var identity: UUID{
         let uuid = UUID()
-        print("UUID \(uuid)")
         return uuid
     }
     
@@ -57,7 +56,6 @@ class PhotosViewData: IdentifiableType, Equatable{
     
     var photoURL: (url: URL?, absoluteString: String){
         let urlString = "https://farm\(model.farm).staticflickr.com/\(model.server)/\(model.id)_\(model.secret)_\(sizeSuffix).jpg"
-        print("Size of suffix \(sizeSuffix)")
         return (URL(string: urlString), urlString)
     }
     

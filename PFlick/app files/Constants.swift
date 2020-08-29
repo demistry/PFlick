@@ -34,6 +34,10 @@ struct Constants {
         static let isFilterOn = "isFilterOn"
     }
     
+    struct AnimationNames {
+        static let EmptyState = "EmptyState"
+    }
+    
     struct Images{
         static let CancelIcon = UIImage(named: "cancelIcon")
         static let SearchIcon = UIImage(named: "searchIcon")

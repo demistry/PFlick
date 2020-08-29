@@ -13,4 +13,5 @@ enum ListStates<T>{
     case loading
     case loadedWithNoItems
     case receivedItems(T)
+    case unknown
 }

@@ -14,7 +14,7 @@ class PhotoGridCellLayout: UICollectionViewLayout {
 
 
     private let columnNumber = 2
-    private let gridPadding: CGFloat = 0.5
+    private let gridPadding: CGFloat = 3
 
  
     private var layoutCache: [UICollectionViewLayoutAttributes] = []
@@ -26,7 +26,6 @@ class PhotoGridCellLayout: UICollectionViewLayout {
         guard let collectionView = collectionView else {
           return 0
         }
-//        let insets = collectionView.contentInset
         return collectionView.bounds.width
     }
 
@@ -78,7 +77,7 @@ class PhotoGridCellLayout: UICollectionViewLayout {
             let indexPath = IndexPath(item: item, section: 0)
             let photoHeight = delegate?.collectionView(
                 collectionView,
-                heightForPhotoAtIndexPath: indexPath) ?? 180
+                heightForPhotoAtIndexPath: indexPath) ?? 150
             let heightOfCellFrame = photoHeight
             let layoutAttrFrame = CGRect(x: horizontalOffset[column], y: verticalOffset[column], width: widthOfCellFrame, height: heightOfCellFrame)
             let insetFrame = layoutAttrFrame.insetBy(dx: gridPadding, dy: gridPadding)

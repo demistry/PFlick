@@ -10,14 +10,13 @@ import Foundation
 
 struct FlickrRequest: ApiRequest{
     var resourceName: String{
-//        return "https://api.flickr.com/services/rest/?api_key=e652c8b37021c8354c0dfd0076c13806&method=flickr.photos.search&text=Dog&page=1&per_page=10&format=json"
         return Constants.Keys.FLICKR_BASE_URL + queryString
     }
     
     static var getRootMethodParameters: [String:Any] = [
         "api_key" : Constants.Keys.FLICKR_API_KEY,
         "method" : "flickr.photos.search",
-        "per_page" : 50,
+        "per_page" : 100,
         "nojsoncallback" : 1,
         "format" : "json",
         ] as [String: Any]

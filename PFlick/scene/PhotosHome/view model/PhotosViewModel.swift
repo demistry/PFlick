@@ -14,24 +14,27 @@ class PhotosViewModel{
     
     
     var pageNumber: Int = 1
-    lazy var photosRelay = BehaviorRelay<ListStates<[PhotosViewData]>>(value: .loadedWithNoItems)
+    lazy var photosRelay = BehaviorRelay<ListStates<[PhotosViewData]>>(value: .unknown)
     var photosList = BehaviorRelay<[PhotosViewData]>(value: [])
     let disposeBag = DisposeBag()
     var previousSearchString = ""
-    func queryForNewPictures(text: String){
-        if text == "" || previousSearchString == text{
+    func queryForNewPictures(text: String, isRefresh: Bool = false){
+        if text == ""{
             return
         }
         previousSearchString = text
         photosRelay.accept(.loading)
         var parameters = FlickrRequest.getRootMethodParameters
         parameters["text"] = text
+        pageNumber = isRefresh ? Int.random(in: 2...10) : 1
         parameters["page"] = pageNumber
         let request = FlickrRequest(parameters: parameters)
-        ApiClient.shared.call(.fetchPictures(request)).map({$0.photos.photo.map({PhotosViewData(model: $0)})}).subscribe(onSuccess: { [weak self](resp) in
-            if resp.count > 0{
-                self?.photosRelay.accept(.receivedItems(resp))
-                self?.photosList.accept(resp)
+        ApiClient.shared.call(.fetchPictures(request)).subscribe(onSuccess: { [weak self](resp) in
+            let response = resp.photos.photo.map({PhotosViewData(model: $0)})
+            if response.count > 0{
+                print("First item here is \(resp.photos.page), respp: \(response[0].photoURL) for page number \(self!.pageNumber)")
+                self?.photosRelay.accept(.receivedItems(response))
+                self?.photosList.accept(response)
             } else{
                 self?.photosRelay.accept(.loadedWithNoItems)
             }

@@ -60,7 +60,6 @@ class ApiClient{
                                 return
                             }
                             let res = JSON(data)
-                            print("repsonse is \(res) from url")
                             do{
                                 let responseData = try weakSelf.decoder.decode(T.ResponseType.self, from: data)
                                 success(responseData)

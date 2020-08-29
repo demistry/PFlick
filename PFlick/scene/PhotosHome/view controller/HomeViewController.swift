@@ -18,6 +18,9 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var filterSwitch: UISwitch!
+    @IBOutlet weak var emptyStateView: UIView!
+    @IBOutlet weak var lottieAnimationView: UIView!
+    @IBOutlet weak var emptyStateDescr: UILabel!
     let disposeBag = DisposeBag()
     var viewModel: PhotosViewModel!
     typealias PhotoSectionModel = AnimatableSectionModel<String, PhotosViewData>
@@ -34,9 +37,18 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
         if let layout = photosCollectionView?.collectionViewLayout as? PhotoGridCellLayout {
           layout.delegate = self
         }
+        let refreshView = UIRefreshControl()
+        refreshView.tintColor = UIColor(red: 0.18, green: 0.18, blue: 0.18, alpha: 1)
+        refreshView.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        photosCollectionView.refreshControl = refreshView
+    }
+    
+    @objc func refresh(){
+        viewModel.queryForNewPictures(text: searchBar.textToSearchFor.value, isRefresh: true)
     }
 
     func setupBindings(){
+        AnimationUtil.shared.showEmptyState(onView: lottieAnimationView)
         filterSwitch.isOn = UserDefaults.standard.bool(forKey: Constants.Keys.isFilterOn)
         filterSwitch.rx.isOn.bind {[weak self] (isOn) in
             UserDefaults.standard.set(isOn, forKey: Constants.Keys.isFilterOn)
@@ -64,11 +76,19 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
                 break
             case .loadedWithNoItems:
                 self?.activityIndicator.stopAnimating()
+                self?.photosCollectionView.refreshControl?.endRefreshing()
+                self?.emptyStateView.alpha = 1
+                self?.emptyStateDescr.text = "Oops, no available picture for the keyword \(self?.searchBar.textToSearchFor.value ?? "")"
                 break
             case .receivedItems(_):
                 self?.activityIndicator.stopAnimating()
+                self?.photosCollectionView.refreshControl?.endRefreshing()
                 self?.filterSwitch.isEnabled = true
+                self?.emptyStateView.alpha = 0
                 break
+            case .unknown:
+                self?.activityIndicator.stopAnimating()
+                self?.photosCollectionView.refreshControl?.endRefreshing()
             }
             }).disposed(by: disposeBag)
         
