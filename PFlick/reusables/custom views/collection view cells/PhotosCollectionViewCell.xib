@@ -62,6 +62,7 @@
             <connections>
                 <outlet property="container" destination="nDS-nV-emH" id="JQZ-1T-hgr"/>
                 <outlet property="filterLabelName" destination="Ilb-hw-6QI" id="sI1-G7-Qoo"/>
+                <outlet property="filterTextBackground" destination="O16-PG-w5z" id="TDK-iG-4rC"/>
                 <outlet property="imageViewDisplay" destination="Rgz-JI-9Nf" id="w1j-jk-2TU"/>
             </connections>
             <point key="canvasLocation" x="215.94202898550725" y="94.084821428571431"/>

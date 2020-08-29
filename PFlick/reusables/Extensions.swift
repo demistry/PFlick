@@ -34,7 +34,7 @@ extension UIColor {
 
 extension UIImage {
     func addFilter(filterType: String)-> UIImage? {
-        guard let currentFilter = CIFilter(name: filterType) else { return nil }
+        guard let currentFilter = CIFilter(name: filterType) else { return self }
         currentFilter.setValue(CIImage(image: self), forKey: kCIInputImageKey)
         let imageContext = CIContext(options: nil)
         if let output = currentFilter.outputImage,

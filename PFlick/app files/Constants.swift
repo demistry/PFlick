@@ -30,6 +30,8 @@ struct Constants {
             assert(key != nil, "Flicker secret key is nil")
             return key!
         }
+        
+        static let isFilterOn = "isFilterOn"
     }
     
     struct Images{

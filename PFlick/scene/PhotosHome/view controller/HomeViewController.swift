@@ -17,6 +17,7 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
     @IBOutlet weak var searchBar: SearchBarView!
     @IBOutlet weak var photosCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var filterSwitch: UISwitch!
     let disposeBag = DisposeBag()
     var viewModel: PhotosViewModel!
     typealias PhotoSectionModel = AnimatableSectionModel<String, PhotosViewData>
@@ -36,6 +37,12 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
     }
 
     func setupBindings(){
+        filterSwitch.isOn = UserDefaults.standard.bool(forKey: Constants.Keys.isFilterOn)
+        filterSwitch.rx.isOn.bind {[weak self] (isOn) in
+            UserDefaults.standard.set(isOn, forKey: Constants.Keys.isFilterOn)
+            self?.photosCollectionView.reloadData()
+        }.disposed(by: disposeBag)
+        
         searchBar.textToSearchFor.subscribe(onNext: { [weak self] text in
             self?.viewModel.queryForNewPictures(text: text)
             }).disposed(by: disposeBag)
@@ -53,12 +60,14 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
             switch state{
             case .loading:
                 self?.activityIndicator.startAnimating()
+                self?.filterSwitch.isEnabled = false
                 break
             case .loadedWithNoItems:
                 self?.activityIndicator.stopAnimating()
                 break
             case .receivedItems(_):
                 self?.activityIndicator.stopAnimating()
+                self?.filterSwitch.isEnabled = true
                 break
             }
             }).disposed(by: disposeBag)

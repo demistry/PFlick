@@ -103,7 +103,7 @@ class SearchBarView: UIView {
     func setupBindings(){
         searchTextField.rx.text.orEmpty
             .distinctUntilChanged()
-            .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance)
+            .debounce(RxTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)
             .bind{[weak self](text) in
             self?.hasText = text.count > 0
             if text.isEmpty || text == ""{
