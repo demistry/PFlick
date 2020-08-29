@@ -24,14 +24,6 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
     let disposeBag = DisposeBag()
     var viewModel: PhotosViewModel!
     typealias PhotoSectionModel = AnimatableSectionModel<String, PhotosViewData>
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        if #available(iOS 13.0, *) {
-            return .darkContent
-        } else {
-            // Fallback on earlier versions
-            return .default
-        }
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
