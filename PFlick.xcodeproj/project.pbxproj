@@ -35,6 +35,10 @@
 		34E812C924F9C8C900E2575A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C824F9C8C900E2575A /* APIClient.swift */; };
 		34E812CB24F9CA3500E2575A /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812CA24F9CA3500E2575A /* APIEndpoints.swift */; };
 		34E812CE24F9D1A500E2575A /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812CD24F9D1A500E2575A /* SwiftyJSON */; };
+		34E812D024F9DA6600E2575A /* PhotosViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812CF24F9DA6600E2575A /* PhotosViewData.swift */; };
+		34E812D324F9DBAC00E2575A /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812D224F9DBAC00E2575A /* Differentiator */; };
+		34E812D524F9DBAC00E2575A /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812D424F9DBAC00E2575A /* RxDataSources */; };
+		34E812D724F9E2E500E2575A /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812D624F9E2E500E2575A /* Enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +89,8 @@
 		34E812C624F9C85400E2575A /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
 		34E812C824F9C8C900E2575A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		34E812CA24F9CA3500E2575A /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
+		34E812CF24F9DA6600E2575A /* PhotosViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewData.swift; sourceTree = "<group>"; };
+		34E812D624F9E2E500E2575A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +99,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E812B624F9922E00E2575A /* SDWebImage in Frameworks */,
+				34E812D324F9DBAC00E2575A /* Differentiator in Frameworks */,
 				34E812B324F991D700E2575A /* RxCocoa in Frameworks */,
+				34E812D524F9DBAC00E2575A /* RxDataSources in Frameworks */,
 				34E812CE24F9D1A500E2575A /* SwiftyJSON in Frameworks */,
 				34E812B124F991D700E2575A /* RxSwift in Frameworks */,
 			);
@@ -229,6 +237,7 @@
 		34E812A124F97EBE00E2575A /* view data */ = {
 			isa = PBXGroup;
 			children = (
+				34E812CF24F9DA6600E2575A /* PhotosViewData.swift */,
 			);
 			path = "view data";
 			sourceTree = "<group>";
@@ -248,6 +257,7 @@
 				34E812AD24F983DF00E2575A /* Extensions.swift */,
 				34E812BC24F9A4E200E2575A /* Protocols.swift */,
 				34E812BE24F9A5FD00E2575A /* PhotoGridCellLayout.swift */,
+				34E812D624F9E2E500E2575A /* Enums.swift */,
 			);
 			path = reusables;
 			sourceTree = "<group>";
@@ -309,6 +319,8 @@
 				34E812B224F991D700E2575A /* RxCocoa */,
 				34E812B524F9922E00E2575A /* SDWebImage */,
 				34E812CD24F9D1A500E2575A /* SwiftyJSON */,
+				34E812D224F9DBAC00E2575A /* Differentiator */,
+				34E812D424F9DBAC00E2575A /* RxDataSources */,
 			);
 			productName = PFlick;
 			productReference = 34E8126224F97C0000E2575A /* PFlick.app */;
@@ -386,6 +398,7 @@
 				34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */,
 				34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */,
 			);
 			productRefGroup = 34E8126324F97C0000E2575A /* Products */;
 			projectDirPath = "";
@@ -433,6 +446,7 @@
 			files = (
 				34E8129B24F97DA500E2575A /* AppCoordinator.swift in Sources */,
 				34E812C924F9C8C900E2575A /* APIClient.swift in Sources */,
+				34E812D724F9E2E500E2575A /* Enums.swift in Sources */,
 				34E812AC24F983C300E2575A /* SearchBarView.swift in Sources */,
 				34E812CB24F9CA3500E2575A /* APIEndpoints.swift in Sources */,
 				34E8126A24F97C0000E2575A /* HomeViewController.swift in Sources */,
@@ -444,6 +458,7 @@
 				34E8126624F97C0000E2575A /* AppDelegate.swift in Sources */,
 				34E812C724F9C85400E2575A /* PhotosViewModel.swift in Sources */,
 				34E812BF24F9A5FD00E2575A /* PhotoGridCellLayout.swift in Sources */,
+				34E812D024F9DA6600E2575A /* PhotosViewData.swift in Sources */,
 				34E812A624F97F2200E2575A /* HomeCoordinator.swift in Sources */,
 				34E8129924F97D7700E2575A /* Coordinator.swift in Sources */,
 				34E812A824F97F5D00E2575A /* Constants.swift in Sources */,
@@ -807,6 +822,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -829,6 +852,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
+		};
+		34E812D224F9DBAC00E2575A /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		34E812D424F9DBAC00E2575A /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

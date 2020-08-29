@@ -32,6 +32,7 @@ class SearchBarView: UIView {
         textfield.font = UIFont.systemFont(ofSize: 14)
         textfield.delegate = self
         textfield.makeLayoutable()
+        textfield.autocorrectionType = .no
         return textfield
     }()
     
@@ -101,8 +102,9 @@ class SearchBarView: UIView {
     
     func setupBindings(){
         searchTextField.rx.text.orEmpty
+            .distinctUntilChanged()
             .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance)
-            .subscribe(onNext: { [weak self](text) in
+            .bind{[weak self](text) in
             self?.hasText = text.count > 0
             if text.isEmpty || text == ""{
                 self?.transitionToSearch()
@@ -110,7 +112,7 @@ class SearchBarView: UIView {
                 self?.transitionToClearField()
                 self?.textToSearchFor.accept(text)
             }
-            }).disposed(by: disposeBag)
+            }.disposed(by: disposeBag)
         
     }
     

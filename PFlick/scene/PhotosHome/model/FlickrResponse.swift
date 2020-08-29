@@ -17,7 +17,7 @@ struct FlickrRequest: ApiRequest{
     static var getRootMethodParameters: [String:Any] = [
         "api_key" : Constants.Keys.FLICKR_API_KEY,
         "method" : "flickr.photos.search",
-        "per_page" : 25,
+        "per_page" : 26,
         "nojsoncallback" : 1,
         "format" : "json",
         ] as [String: Any]

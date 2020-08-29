@@ -13,7 +13,7 @@ class PhotoGridCellLayout: UICollectionViewLayout {
     weak var delegate: PhotoGridCellLayoutDelegate?
 
 
-    private let columnNumber = 2
+    private let columnNumber = 3
     private let gridPadding: CGFloat = 8
 
  
@@ -39,7 +39,7 @@ class PhotoGridCellLayout: UICollectionViewLayout {
                 cvVisibleLayoutAttributes.append(attr)
             }
         }
-        return cvVisibleLayoutAttributes
+        return layoutCache
     }
     
     override var collectionViewContentSize: CGSize {
@@ -47,12 +47,18 @@ class PhotoGridCellLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        layoutCache[indexPath.item]
+        if layoutCache.indices.contains(indexPath.item){
+            return layoutCache[indexPath.item]
+        } else{
+//            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+            invalidateLayout()
+            return nil
+        }
     }
   
     override func prepare() {
   
-        guard layoutCache.isEmpty, let collectionView = collectionView else{
+        guard layoutCache.isEmpty, let collectionView = collectionView, collectionView.numberOfSections > 0 else{
             return
         }
       

@@ -9,22 +9,24 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import RxDataSources
 
 class HomeViewController: UIViewController, HomeStoryboardDelegate {
 
     weak var coordinator: HomeCoordinator?
     @IBOutlet weak var searchBar: SearchBarView!
     @IBOutlet weak var photosCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     let disposeBag = DisposeBag()
-    var array: [Photo] = []
     var viewModel: PhotosViewModel!
+    typealias PhotoSectionModel = AnimatableSectionModel<String, PhotosViewData>
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
-        photosCollectionView.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 32, right: 16)
+        photosCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 16, right: 0)
         photosCollectionView.register(PhotosCollectionViewCell.nib(), forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier())
-        setupCollectionView()
         setupBindings()
+        setupCollectionView()
     }
     
     func setupCollectionView(){
@@ -32,21 +34,50 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
           layout.delegate = self
         }
     }
+
     func setupBindings(){
         searchBar.textToSearchFor.subscribe(onNext: { [weak self] text in
             self?.viewModel.queryForNewPictures(text: text)
             }).disposed(by: disposeBag)
         photosCollectionView.rx.setDelegate(self).disposed(by: disposeBag)
-        array = [Photo(image: "01"), Photo(image: "02"), Photo(image: "03"), Photo(image: "04"),Photo(image: "05"), Photo(image: "06"),Photo(image: "07"),Photo(image: "08"),Photo(image: "09"),Photo(image: "10"),Photo(image: "11"),Photo(image: "12"),Photo(image: "13")]
-        Observable.just(array).asDriver(onErrorJustReturn: []).drive(photosCollectionView.rx.items(cellIdentifier: PhotosCollectionViewCell.identifier(), cellType: PhotosCollectionViewCell.self)){index,photo,cell in
-            cell.photo = photo
-        }.disposed(by: disposeBag)
+        let dataSource = RxCollectionViewSectionedAnimatedDataSource<PhotoSectionModel>( configureCell: { x, collectionView, indexPath, model in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifier(), for: indexPath) as? PhotosCollectionViewCell else{
+                return UICollectionViewCell()
+            }
+            cell.indexPath = indexPath
+            cell.photo = model
+            return cell
+            })
+
+        viewModel.photosRelay.asDriver().drive(onNext: {[weak self]state in
+            switch state{
+            case .loading:
+                self?.activityIndicator.startAnimating()
+                break
+            case .loadedWithNoItems:
+                self?.activityIndicator.stopAnimating()
+                break
+            case .receivedItems(_):
+                self?.activityIndicator.stopAnimating()
+                break
+            }
+            }).disposed(by: disposeBag)
+        
+        viewModel.photosList
+            .asDriver()
+        .distinctUntilChanged()
+            .map({[PhotoSectionModel(model: "", items: $0)]})
+            .drive(photosCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: self.disposeBag)
+            
     }
+    
+
 }
 
 extension HomeViewController: PhotoGridCellLayoutDelegate{
     func collectionView(_ collectionView: UICollectionView, heightForPhotoAtIndexPath indexPath: IndexPath) -> CGFloat {
-        array[indexPath.item].photo?.size.height ?? 180
+        CGFloat(viewModel.photosList.value[indexPath.item].heightOfPhoto)
     }
 }
 
@@ -56,4 +87,5 @@ extension HomeViewController: UICollectionViewDelegate{
         return CGSize(width: itemSize, height: itemSize)
     }
 }
+
 

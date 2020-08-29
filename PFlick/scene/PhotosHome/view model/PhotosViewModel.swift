@@ -8,23 +8,34 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 class PhotosViewModel{
     
     
     var pageNumber: Int = 1
+    lazy var photosRelay = BehaviorRelay<ListStates<[PhotosViewData]>>(value: .loadedWithNoItems)
+    var photosList = BehaviorRelay<[PhotosViewData]>(value: [])
     let disposeBag = DisposeBag()
+    var previousSearchString = ""
     func queryForNewPictures(text: String){
-        if text == ""{
+        if text == "" || previousSearchString == text{
             return
         }
+        previousSearchString = text
+        photosRelay.accept(.loading)
         var parameters = FlickrRequest.getRootMethodParameters
         parameters["text"] = text
         parameters["page"] = pageNumber
         let request = FlickrRequest(parameters: parameters)
-        ApiClient.shared.call(.fetchPictures(request)).subscribe(onSuccess: { (resp) in
-            let flickerRes = resp as FlickrResponse
-            print("Flicker res received here is \(flickerRes.photos.photo.count)")
+        ApiClient.shared.call(.fetchPictures(request)).map({$0.photos.photo.map({PhotosViewData(model: $0)})}).subscribe(onSuccess: { [weak self](resp) in
+            if resp.count > 0{
+                self?.photosRelay.accept(.receivedItems(resp))
+                self?.photosList.accept(resp)
+            } else{
+                self?.photosRelay.accept(.loadedWithNoItems)
+            }
+            
         }) { (err) in
             if let error = err as? APIError{
                 switch error{
@@ -34,4 +45,5 @@ class PhotosViewModel{
             }
         }.disposed(by: disposeBag)
     }
+    
 }
