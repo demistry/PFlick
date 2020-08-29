@@ -10,9 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+
 class SearchBarView: UIView {
 
     let disposeBag = DisposeBag()
+    var textToSearchFor = BehaviorRelay<String>(value: "")
     private lazy var searchBackgroundView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 56))
         view.makeLayoutable()
@@ -64,7 +67,6 @@ class SearchBarView: UIView {
     }
     
     func initialize(){
-        backgroundColor = .clear
         addSubview(searchBackgroundView)
         searchBackgroundView.addGestureRecognizer(UITapGestureRecognizer())
         searchBackgroundView.addSubview(searchTextField)
@@ -74,13 +76,39 @@ class SearchBarView: UIView {
         setupBindings()
     }
     
+    func addNeumorphism(radius: CGFloat){
+        backgroundColor = .offWhite
+        layer.cornerRadius = radius
+        let darkShadow = CALayer()
+        let lightShadow = CALayer()
+        darkShadow.frame = self.bounds
+        darkShadow.cornerRadius = radius
+        darkShadow.backgroundColor = UIColor.offWhite.cgColor
+        darkShadow.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
+        darkShadow.shadowOffset = CGSize(width: 10, height: 10)
+        darkShadow.shadowOpacity = 1
+        darkShadow.shadowRadius = radius
+        self.layer.insertSublayer(darkShadow, at: 0)
+        lightShadow.frame = self.bounds
+        lightShadow.cornerRadius = radius
+        lightShadow.backgroundColor = UIColor.offWhite.cgColor
+        lightShadow.shadowColor = UIColor.white.withAlphaComponent(0.9).cgColor
+        lightShadow.shadowOffset = CGSize(width: -7, height: -5)
+        lightShadow.shadowOpacity = 1
+        lightShadow.shadowRadius = radius
+        self.layer.insertSublayer(lightShadow, at: 0)
+    }
+    
     func setupBindings(){
-        searchTextField.rx.text.orEmpty.subscribe(onNext: { [weak self](text) in
+        searchTextField.rx.text.orEmpty
+            .debounce(RxTimeInterval.milliseconds(300), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self](text) in
             self?.hasText = text.count > 0
-            if text.isEmpty{
+            if text.isEmpty || text == ""{
                 self?.transitionToSearch()
             } else{
                 self?.transitionToClearField()
+                self?.textToSearchFor.accept(text)
             }
             }).disposed(by: disposeBag)
         
@@ -103,10 +131,11 @@ class SearchBarView: UIView {
     }
     
     func setupConstraints(){
+        let backgroundFrameHeight = frame.height > 56 ? 56 : max(20,frame.height)
         NSLayoutConstraint.activate([searchBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor),
                                     searchBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor),
                                     searchBackgroundView.centerYAnchor.constraint(equalTo: centerYAnchor),
-                                    searchBackgroundView.heightAnchor.constraint(equalToConstant: frame.height > 56 ? 56 : max(20,frame.height)),
+                                    searchBackgroundView.heightAnchor.constraint(equalToConstant: backgroundFrameHeight),
         
         
         
@@ -124,8 +153,10 @@ class SearchBarView: UIView {
                                     cancelSearchImage.heightAnchor.constraint(equalToConstant: 16),
                                     cancelSearchImage.widthAnchor.constraint(equalToConstant: 16)])
         
-        searchBackgroundView.layer.cornerRadius = searchBackgroundView.frame.height / 2
+        searchBackgroundView.layer.cornerRadius = backgroundFrameHeight / 2
         searchBackgroundView.clipsToBounds = true
+        
+        addNeumorphism(radius: backgroundFrameHeight / 2)
     }
 }
 

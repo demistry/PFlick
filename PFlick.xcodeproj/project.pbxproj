@@ -25,6 +25,16 @@
 		34E812B124F991D700E2575A /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812B024F991D700E2575A /* RxSwift */; };
 		34E812B324F991D700E2575A /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812B224F991D700E2575A /* RxCocoa */; };
 		34E812B624F9922E00E2575A /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812B524F9922E00E2575A /* SDWebImage */; };
+		34E812BA24F9A4B800E2575A /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812B824F9A4B800E2575A /* PhotosCollectionViewCell.swift */; };
+		34E812BB24F9A4B800E2575A /* PhotosCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34E812B924F9A4B800E2575A /* PhotosCollectionViewCell.xib */; };
+		34E812BD24F9A4E200E2575A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812BC24F9A4E200E2575A /* Protocols.swift */; };
+		34E812BF24F9A5FD00E2575A /* PhotoGridCellLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812BE24F9A5FD00E2575A /* PhotoGridCellLayout.swift */; };
+		34E812C224F9C4F000E2575A /* FlickrResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C124F9C4F000E2575A /* FlickrResponse.swift */; };
+		34E812C524F9C53700E2575A /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C424F9C53600E2575A /* APIRequest.swift */; };
+		34E812C724F9C85400E2575A /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C624F9C85400E2575A /* PhotosViewModel.swift */; };
+		34E812C924F9C8C900E2575A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C824F9C8C900E2575A /* APIClient.swift */; };
+		34E812CB24F9CA3500E2575A /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812CA24F9CA3500E2575A /* APIEndpoints.swift */; };
+		34E812CE24F9D1A500E2575A /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812CD24F9D1A500E2575A /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +76,15 @@
 		34E812A724F97F5D00E2575A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		34E812AB24F983C300E2575A /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		34E812AD24F983DF00E2575A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		34E812B824F9A4B800E2575A /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
+		34E812B924F9A4B800E2575A /* PhotosCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotosCollectionViewCell.xib; sourceTree = "<group>"; };
+		34E812BC24F9A4E200E2575A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		34E812BE24F9A5FD00E2575A /* PhotoGridCellLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridCellLayout.swift; sourceTree = "<group>"; };
+		34E812C124F9C4F000E2575A /* FlickrResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlickrResponse.swift; sourceTree = "<group>"; };
+		34E812C424F9C53600E2575A /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		34E812C624F9C85400E2575A /* PhotosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewModel.swift; sourceTree = "<group>"; };
+		34E812C824F9C8C900E2575A /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		34E812CA24F9CA3500E2575A /* APIEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoints.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +94,7 @@
 			files = (
 				34E812B624F9922E00E2575A /* SDWebImage in Frameworks */,
 				34E812B324F991D700E2575A /* RxCocoa in Frameworks */,
+				34E812CE24F9D1A500E2575A /* SwiftyJSON in Frameworks */,
 				34E812B124F991D700E2575A /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,6 +139,7 @@
 		34E8126424F97C0000E2575A /* PFlick */ = {
 			isa = PBXGroup;
 			children = (
+				34E812C324F9C52A00E2575A /* networking */,
 				34E812A924F9816F00E2575A /* reusables */,
 				34E8129724F97D6D00E2575A /* app files */,
 				34E8129524F97CC200E2575A /* scene */,
@@ -160,6 +181,7 @@
 		34E8129624F97CC800E2575A /* PhotosHome */ = {
 			isa = PBXGroup;
 			children = (
+				34E812C024F9C4D900E2575A /* model */,
 				34E812A424F97F1800E2575A /* coordinator */,
 				34E812A124F97EBE00E2575A /* view data */,
 				34E812A024F97EB500E2575A /* storyboard */,
@@ -183,6 +205,7 @@
 		34E8129E24F97E9F00E2575A /* view model */ = {
 			isa = PBXGroup;
 			children = (
+				34E812C624F9C85400E2575A /* PhotosViewModel.swift */,
 			);
 			path = "view model";
 			sourceTree = "<group>";
@@ -223,6 +246,8 @@
 			children = (
 				34E812AA24F9817500E2575A /* custom views */,
 				34E812AD24F983DF00E2575A /* Extensions.swift */,
+				34E812BC24F9A4E200E2575A /* Protocols.swift */,
+				34E812BE24F9A5FD00E2575A /* PhotoGridCellLayout.swift */,
 			);
 			path = reusables;
 			sourceTree = "<group>";
@@ -230,9 +255,37 @@
 		34E812AA24F9817500E2575A /* custom views */ = {
 			isa = PBXGroup;
 			children = (
+				34E812B724F9A49700E2575A /* collection view cells */,
 				34E812AB24F983C300E2575A /* SearchBarView.swift */,
 			);
 			path = "custom views";
+			sourceTree = "<group>";
+		};
+		34E812B724F9A49700E2575A /* collection view cells */ = {
+			isa = PBXGroup;
+			children = (
+				34E812B824F9A4B800E2575A /* PhotosCollectionViewCell.swift */,
+				34E812B924F9A4B800E2575A /* PhotosCollectionViewCell.xib */,
+			);
+			path = "collection view cells";
+			sourceTree = "<group>";
+		};
+		34E812C024F9C4D900E2575A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				34E812C124F9C4F000E2575A /* FlickrResponse.swift */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		34E812C324F9C52A00E2575A /* networking */ = {
+			isa = PBXGroup;
+			children = (
+				34E812C424F9C53600E2575A /* APIRequest.swift */,
+				34E812C824F9C8C900E2575A /* APIClient.swift */,
+				34E812CA24F9CA3500E2575A /* APIEndpoints.swift */,
+			);
+			path = networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +308,7 @@
 				34E812B024F991D700E2575A /* RxSwift */,
 				34E812B224F991D700E2575A /* RxCocoa */,
 				34E812B524F9922E00E2575A /* SDWebImage */,
+				34E812CD24F9D1A500E2575A /* SwiftyJSON */,
 			);
 			productName = PFlick;
 			productReference = 34E8126224F97C0000E2575A /* PFlick.app */;
@@ -331,6 +385,7 @@
 			packageReferences = (
 				34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */,
 				34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = 34E8126324F97C0000E2575A /* Products */;
 			projectDirPath = "";
@@ -349,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E8127224F97C0200E2575A /* LaunchScreen.storyboard in Resources */,
+				34E812BB24F9A4B800E2575A /* PhotosCollectionViewCell.xib in Resources */,
 				34E8126F24F97C0100E2575A /* Assets.xcassets in Resources */,
 				34E8126D24F97C0000E2575A /* Main.storyboard in Resources */,
 			);
@@ -376,15 +432,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E8129B24F97DA500E2575A /* AppCoordinator.swift in Sources */,
+				34E812C924F9C8C900E2575A /* APIClient.swift in Sources */,
 				34E812AC24F983C300E2575A /* SearchBarView.swift in Sources */,
+				34E812CB24F9CA3500E2575A /* APIEndpoints.swift in Sources */,
 				34E8126A24F97C0000E2575A /* HomeViewController.swift in Sources */,
+				34E812BD24F9A4E200E2575A /* Protocols.swift in Sources */,
 				34E812A324F97EF500E2575A /* HomeStoryboardDelegate.swift in Sources */,
 				34E8129D24F97DCF00E2575A /* Router.swift in Sources */,
+				34E812BA24F9A4B800E2575A /* PhotosCollectionViewCell.swift in Sources */,
 				34E812AE24F983DF00E2575A /* Extensions.swift in Sources */,
 				34E8126624F97C0000E2575A /* AppDelegate.swift in Sources */,
+				34E812C724F9C85400E2575A /* PhotosViewModel.swift in Sources */,
+				34E812BF24F9A5FD00E2575A /* PhotoGridCellLayout.swift in Sources */,
 				34E812A624F97F2200E2575A /* HomeCoordinator.swift in Sources */,
 				34E8129924F97D7700E2575A /* Coordinator.swift in Sources */,
 				34E812A824F97F5D00E2575A /* Constants.swift in Sources */,
+				34E812C524F9C53700E2575A /* APIRequest.swift in Sources */,
+				34E812C224F9C4F000E2575A /* FlickrResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +539,8 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				FLICKR_API_KEY = e652c8b37021c8354c0dfd0076c13806;
+				FLICKR_APP_SECRET = 612596e85f4bc2a4;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -535,6 +601,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FLICKR_API_KEY = e652c8b37021c8354c0dfd0076c13806;
+				FLICKR_APP_SECRET = 612596e85f4bc2a4;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -731,6 +799,14 @@
 				minimumVersion = 5.9.0;
 			};
 		};
+		34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -748,6 +824,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		34E812CD24F9D1A500E2575A /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

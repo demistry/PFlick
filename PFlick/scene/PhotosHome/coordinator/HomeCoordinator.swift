@@ -20,7 +20,9 @@ class HomeCoordinator: Coordinator{
     
     func start() {
         let homeViewController = HomeViewController.instantiate()
+        let photosViewModel = PhotosViewModel()
         homeViewController.coordinator = self
+        homeViewController.viewModel = photosViewModel
         router.setRootScreen(homeViewController, hideBar: true)
     }
 }
