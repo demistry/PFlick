@@ -34,7 +34,6 @@
 		34E812C724F9C85400E2575A /* PhotosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C624F9C85400E2575A /* PhotosViewModel.swift */; };
 		34E812C924F9C8C900E2575A /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812C824F9C8C900E2575A /* APIClient.swift */; };
 		34E812CB24F9CA3500E2575A /* APIEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812CA24F9CA3500E2575A /* APIEndpoints.swift */; };
-		34E812CE24F9D1A500E2575A /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812CD24F9D1A500E2575A /* SwiftyJSON */; };
 		34E812D024F9DA6600E2575A /* PhotosViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812CF24F9DA6600E2575A /* PhotosViewData.swift */; };
 		34E812D324F9DBAC00E2575A /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812D224F9DBAC00E2575A /* Differentiator */; };
 		34E812D524F9DBAC00E2575A /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812D424F9DBAC00E2575A /* RxDataSources */; };
@@ -42,6 +41,8 @@
 		34E812DA24FA336000E2575A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812D924FA336000E2575A /* Lottie */; };
 		34E812DD24FA33A300E2575A /* EmptyState.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E812DC24FA33A300E2575A /* EmptyState.json */; };
 		34E812DF24FA33B700E2575A /* AnimationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812DE24FA33B700E2575A /* AnimationUtil.swift */; };
+		34E812E124FA723200E2575A /* NetworkMonitoringManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E812E024FA723200E2575A /* NetworkMonitoringManager.swift */; };
+		34E812E424FA72D000E2575A /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = 34E812E324FA72D000E2575A /* Reachability */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,6 +97,7 @@
 		34E812D624F9E2E500E2575A /* Enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		34E812DC24FA33A300E2575A /* EmptyState.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = EmptyState.json; sourceTree = "<group>"; };
 		34E812DE24FA33B700E2575A /* AnimationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationUtil.swift; sourceTree = "<group>"; };
+		34E812E024FA723200E2575A /* NetworkMonitoringManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitoringManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +106,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				34E812B624F9922E00E2575A /* SDWebImage in Frameworks */,
+				34E812E424FA72D000E2575A /* Reachability in Frameworks */,
 				34E812DA24FA336000E2575A /* Lottie in Frameworks */,
 				34E812D324F9DBAC00E2575A /* Differentiator in Frameworks */,
 				34E812B324F991D700E2575A /* RxCocoa in Frameworks */,
 				34E812D524F9DBAC00E2575A /* RxDataSources in Frameworks */,
-				34E812CE24F9D1A500E2575A /* SwiftyJSON in Frameworks */,
 				34E812B124F991D700E2575A /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -301,6 +303,7 @@
 				34E812C424F9C53600E2575A /* APIRequest.swift */,
 				34E812C824F9C8C900E2575A /* APIClient.swift */,
 				34E812CA24F9CA3500E2575A /* APIEndpoints.swift */,
+				34E812E024FA723200E2575A /* NetworkMonitoringManager.swift */,
 			);
 			path = networking;
 			sourceTree = "<group>";
@@ -334,10 +337,10 @@
 				34E812B024F991D700E2575A /* RxSwift */,
 				34E812B224F991D700E2575A /* RxCocoa */,
 				34E812B524F9922E00E2575A /* SDWebImage */,
-				34E812CD24F9D1A500E2575A /* SwiftyJSON */,
 				34E812D224F9DBAC00E2575A /* Differentiator */,
 				34E812D424F9DBAC00E2575A /* RxDataSources */,
 				34E812D924FA336000E2575A /* Lottie */,
+				34E812E324FA72D000E2575A /* Reachability */,
 			);
 			productName = PFlick;
 			productReference = 34E8126224F97C0000E2575A /* PFlick.app */;
@@ -414,9 +417,9 @@
 			packageReferences = (
 				34E812AF24F991D700E2575A /* XCRemoteSwiftPackageReference "RxSwift" */,
 				34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */,
 				34E812D824FA335F00E2575A /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				34E812E224FA72D000E2575A /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = 34E8126324F97C0000E2575A /* Products */;
 			projectDirPath = "";
@@ -477,6 +480,7 @@
 				34E812AE24F983DF00E2575A /* Extensions.swift in Sources */,
 				34E8126624F97C0000E2575A /* AppDelegate.swift in Sources */,
 				34E812C724F9C85400E2575A /* PhotosViewModel.swift in Sources */,
+				34E812E124FA723200E2575A /* NetworkMonitoringManager.swift in Sources */,
 				34E812BF24F9A5FD00E2575A /* PhotoGridCellLayout.swift in Sources */,
 				34E812D024F9DA6600E2575A /* PhotosViewData.swift in Sources */,
 				34E812A624F97F2200E2575A /* HomeCoordinator.swift in Sources */,
@@ -700,7 +704,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A8SA62ZA26;
 				INFOPLIST_FILE = PFlickTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -722,7 +726,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = A8SA62ZA26;
 				INFOPLIST_FILE = PFlickTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -834,14 +838,6 @@
 				minimumVersion = 5.9.0;
 			};
 		};
-		34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
 		34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
@@ -856,6 +852,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 3.1.8;
+			};
+		};
+		34E812E224FA72D000E2575A /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -876,11 +880,6 @@
 			package = 34E812B424F9922E00E2575A /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		34E812CD24F9D1A500E2575A /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 34E812CC24F9D1A500E2575A /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
 		34E812D224F9DBAC00E2575A /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 34E812D124F9DBAC00E2575A /* XCRemoteSwiftPackageReference "RxDataSources" */;
@@ -895,6 +894,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 34E812D824FA335F00E2575A /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		34E812E324FA72D000E2575A /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34E812E224FA72D000E2575A /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

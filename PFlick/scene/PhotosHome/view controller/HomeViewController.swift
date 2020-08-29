@@ -24,6 +24,14 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
     let disposeBag = DisposeBag()
     var viewModel: PhotosViewModel!
     typealias PhotoSectionModel = AnimatableSectionModel<String, PhotosViewData>
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            // Fallback on earlier versions
+            return .default
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         hideKeyboardWhenTappedAround()
@@ -31,7 +39,16 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
         photosCollectionView.register(PhotosCollectionViewCell.nib(), forCellWithReuseIdentifier: PhotosCollectionViewCell.identifier())
         setupBindings()
         setupCollectionView()
+        
+        NetworkManager.sharedInstance.reachability?.whenReachable = {[weak self] _ in
+            switch self?.viewModel.photosRelay.value{
+            case .failed(_):
+                self?.viewModel.queryForNewPictures(text: self?.searchBar.textToSearchFor.value ?? "")
+            default: break
+            }
+        }
     }
+    
     
     func setupCollectionView(){
         if let layout = photosCollectionView?.collectionViewLayout as? PhotoGridCellLayout {
@@ -86,6 +103,11 @@ class HomeViewController: UIViewController, HomeStoryboardDelegate {
                 self?.filterSwitch.isEnabled = true
                 self?.emptyStateView.alpha = 0
                 break
+            case .failed(let err):
+                self?.activityIndicator.stopAnimating()
+                self?.photosCollectionView.refreshControl?.endRefreshing()
+                self?.emptyStateView.alpha = 1
+                self?.emptyStateDescr.text = err
             case .unknown:
                 self?.activityIndicator.stopAnimating()
                 self?.photosCollectionView.refreshControl?.endRefreshing()

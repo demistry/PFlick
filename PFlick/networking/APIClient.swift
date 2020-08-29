@@ -2,13 +2,13 @@
 //  APIClient.swift
 //  PFlick
 //
-//  Created by David Ilenwabor on 29/08/2020.
+//  Created by David Ilenwabor on 28/08/2020.
 //  Copyright © 2020 Davidemi. All rights reserved.
 //
 
 import Foundation
 import RxSwift
-import SwiftyJSON
+
 
 class ApiClient{
     
@@ -28,6 +28,10 @@ class ApiClient{
     private func retryCall(for attempt: Int, after seconds: Int, task: @escaping () -> NetworkCallAync, success: @escaping (Decodable) -> (), failure: @escaping (Error?) -> ()) {
         weak var wSelf = self
         task()(success, { error in
+            if !NetworkManager.sharedInstance.connectedToNetwork(){
+                failure(error)
+                return
+            }
             if attempt <= 0 {
                 failure(error)
                 return
@@ -43,6 +47,9 @@ class ApiClient{
         return Single<T.ResponseType>.create { (single) in
             weakSelf.retryCall(for: 1, after: 5, task: {
                 return {success, failure in
+                    if !NetworkManager.sharedInstance.connectedToNetwork(){
+                        failure(.responseError)
+                    }
                     if let url = URL(string: endpoint.value.resourceName){
                         
                         var httpRequest = URLRequest(url: url)
@@ -59,7 +66,6 @@ class ApiClient{
                                 failure(.noDataResponse)
                                 return
                             }
-                            let res = JSON(data)
                             do{
                                 let responseData = try weakSelf.decoder.decode(T.ResponseType.self, from: data)
                                 success(responseData)

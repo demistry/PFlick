@@ -2,7 +2,7 @@
 //  PhotosViewModel.swift
 //  PFlick
 //
-//  Created by David Ilenwabor on 29/08/2020.
+//  Created by David Ilenwabor on 28/08/2020.
 //  Copyright © 2020 Davidemi. All rights reserved.
 //
 
@@ -32,7 +32,6 @@ class PhotosViewModel{
         ApiClient.shared.call(.fetchPictures(request)).subscribe(onSuccess: { [weak self](resp) in
             let response = resp.photos.photo.map({PhotosViewData(model: $0)})
             if response.count > 0{
-                print("First item here is \(resp.photos.page), respp: \(response[0].photoURL) for page number \(self!.pageNumber)")
                 self?.photosRelay.accept(.receivedItems(response))
                 self?.photosList.accept(response)
             } else{
@@ -42,8 +41,10 @@ class PhotosViewModel{
         }) { (err) in
             if let error = err as? APIError{
                 switch error{
-                case .responseError:print("Response error with result")
-                default:break
+                case .responseError:
+                    self.photosRelay.accept(.failed("Check internet connection"))
+                default:
+                    self.photosRelay.accept(.unknown)
                 }
             }
         }.disposed(by: disposeBag)
