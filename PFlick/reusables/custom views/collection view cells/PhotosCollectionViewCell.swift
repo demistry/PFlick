@@ -16,6 +16,7 @@ protocol PhotoCollectionViewCellDelegate: class {
 class PhotosCollectionViewCell: UICollectionViewCell, Cellable {
     @IBOutlet weak var container: UIView!
     
+    @IBOutlet weak var filterLabelName: UILabel!
     @IBOutlet weak var imageViewDisplay: UIImageView!
     var indexPath: IndexPath!
     weak var delegate: PhotoCollectionViewCellDelegate?
@@ -25,8 +26,9 @@ class PhotosCollectionViewCell: UICollectionViewCell, Cellable {
                 guard err == nil else{
                     return
                 }
-                self?.imageViewDisplay.image = img
-                self?.delegate?.reloadCell(cell: self ?? PhotosCollectionViewCell(), imageHeight: img?.size.height ?? 180, indexPath: self?.indexPath ?? IndexPath(item: 0, section: 0))
+                self?.photo.originalImage = img
+                self?.imageViewDisplay.image = img?.addFilter(filterType: self?.photo.filter ?? "")
+                self?.filterLabelName.text = self?.photo.filter
             }
         }
     }

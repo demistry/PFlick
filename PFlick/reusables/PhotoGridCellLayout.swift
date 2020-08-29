@@ -14,7 +14,7 @@ class PhotoGridCellLayout: UICollectionViewLayout {
 
 
     private let columnNumber = 2
-    private let gridPadding: CGFloat = 1
+    private let gridPadding: CGFloat = 0.5
 
  
     private var layoutCache: [UICollectionViewLayoutAttributes] = []

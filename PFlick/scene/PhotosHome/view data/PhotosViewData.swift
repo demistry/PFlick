@@ -8,6 +8,7 @@
 
 import Foundation
 import RxDataSources
+import UIKit
 
 class PhotosViewData: IdentifiableType, Equatable{
     
@@ -38,6 +39,21 @@ class PhotosViewData: IdentifiableType, Equatable{
         default: return 180
         }
     }
+    
+    var originalImage: UIImage?
+    
+    var filter  = ["CIColorInvert", "CIPhotoEffectNoir", "CIPhotoEffectInstant", "CIMultiplyBlendMode",
+    "CIMedianFilter",
+    "CIColorMatrix",
+    "CIColorPolynomial",
+    "CIExposureAdjust",
+    "CIGammaAdjust",
+    "CINoiseReduction",
+    "CIColorMap",
+    "CIColorMonochrome",
+    "CIColorPosterize",
+    "CIFalseColor",
+        ].randomElement() ?? "CIColorClamp"
     
     var photoURL: (url: URL?, absoluteString: String){
         let urlString = "https://farm\(model.farm).staticflickr.com/\(model.server)/\(model.id)_\(model.secret)_\(sizeSuffix).jpg"
