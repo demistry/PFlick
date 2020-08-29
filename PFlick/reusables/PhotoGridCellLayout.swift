@@ -13,8 +13,8 @@ class PhotoGridCellLayout: UICollectionViewLayout {
     weak var delegate: PhotoGridCellLayoutDelegate?
 
 
-    private let columnNumber = 3
-    private let gridPadding: CGFloat = 8
+    private let columnNumber = 2
+    private let gridPadding: CGFloat = 1
 
  
     private var layoutCache: [UICollectionViewLayoutAttributes] = []
@@ -26,8 +26,8 @@ class PhotoGridCellLayout: UICollectionViewLayout {
         guard let collectionView = collectionView else {
           return 0
         }
-        let insets = collectionView.contentInset
-        return collectionView.bounds.width - (insets.left + insets.right)
+//        let insets = collectionView.contentInset
+        return collectionView.bounds.width
     }
 
  

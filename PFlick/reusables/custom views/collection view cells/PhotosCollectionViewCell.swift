@@ -34,8 +34,8 @@ class PhotosCollectionViewCell: UICollectionViewCell, Cellable {
         super.awakeFromNib()
         // Initialization code
         imageViewDisplay.backgroundColor = UIColor(red: 0.18, green: 0.18, blue: 0.18, alpha: 1)
-        imageViewDisplay.layer.cornerRadius = 6
-        imageViewDisplay.layer.masksToBounds = true
+//        imageViewDisplay.layer.cornerRadius = 6
+//        imageViewDisplay.layer.masksToBounds = true
         imageViewDisplay.contentMode = .scaleAspectFill
     }
 
